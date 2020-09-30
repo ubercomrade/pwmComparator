@@ -106,18 +106,6 @@ def get_threshold(path, fpr_for_thr):
     return(last_score)
 
 
-def get_motif_length(models):
-    with open(models + '/pwm_model/pwm_model.fasta', 'r') as file:
-        for i in file:
-            if i.startswith('>'):
-                continue
-            else:
-                motif_length = len(i.strip())
-                break
-    file.close()
-    return(motif_length)
-
-
 def pipeline(models_names, models_paths, bed_path, fpr, \
     path_to_out, path_to_promoters, \
     path_to_genome, cpu_count):
@@ -189,8 +177,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
             # SCAN
             scan_peaks_by_pwm(peaks_fa, pwm_path, model, scan, pwm_threshold_table, fpr)
             scan_best_by_pwm(scan_best + '/{}.scores.txt'.format(model),
-                 pwm_model,
-                 fasta_test)
+                 pwm_path, peaks_fa)
         else:
             tools.remove(model)
             print('{} has poor table with thresholds'.format(model))
