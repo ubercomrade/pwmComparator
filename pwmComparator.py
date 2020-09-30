@@ -75,7 +75,7 @@ def calculate_thresholds_for_pwm(path_to_promoters, pwm_model_dir, thresholds_di
 def scan_peaks_by_pwm(fasta_test, model_path, model, scan, threshold_table_path, fpr):
     thr_pwm = get_threshold(threshold_table_path, fpr)
     pwm_scan_path = scan + '/{0}_{1:.2e}.bed'.format(model, fpr)
-    print('Scan peaks by PWM with FPR: {0} THR: {1}'.format(fpr, thr_pwm))
+    print('Scan peaks with FPR: {0} THR: {1}'.format(fpr, thr_pwm))
     scan_by_pwm(fasta_test, model_path, thr_pwm, pwm_scan_path)
     return(0)
 
@@ -164,6 +164,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
 
     ### CALCULATE PWM MODEL ###
     for model, path in zip(models_names, models_paths):
+        print("Working with {}".format(model))
         pwm_dir = models + '/{}/'.format(model)
         if not os.path.isdir(pwm_dir):
             os.mkdir(pwm_dir)
@@ -176,17 +177,17 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
         
         # THRESHOLD
         if not os.path.isfile(pwm_threshold_table):
-            print('Calculate threshold for PWM based on promoters and fpr')
+            print('Calculate threshold based on promoters and fpr')
             get_threshold_for_pwm(path_to_promoters,
                     pwm_path,
                     pwm_threshold_table)
         else:
-            print('Thresholds for {} already calculated'.format(model))
+            print('Thresholds already calculated')
         
         check = check_threshold_table(pwm_threshold_table)
         if check < fpr:
             # SCAN
-            scan_peaks_by_pwm(peaks_fa, pwm_model, model, scan, pwm_threshold_table, fpr)
+            scan_peaks_by_pwm(peaks_fa, pwm_path, model, scan, pwm_threshold_table, fpr)
             scan_best_by_pwm(scan_best + '/{}.scores.txt'.format(model),
                  pwm_model,
                  fasta_test)
