@@ -196,7 +196,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
     # COMBINE SCAN
     list_bed_path = [scan + '/{0}_{1:.2e}.bed'.format(i, fpr) for i in models_names]
     list_path_fpr_table = [thresholds + '/{}_model_thresholds.txt'.format(i) for i in models_names]
-    combine_results(fasta_test, list_bed_path, list_path_fpr_table, tools, results + '/combined_scan.pro')
+    combine_results(peaks_fa, list_bed_path, list_path_fpr_table, tools, results + '/combined_scan.pro')
 
     # CALCULATE SUMMARY
     write_peaks_classification(results + '/combined_scan.pro', results + '/peaks_classification.tsv')
