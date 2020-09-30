@@ -27,7 +27,7 @@ def prepare_data(path_to_genome, bed_path, bed, fasta):
 
     if not os.path.isfile(bed + '/' + 'peaks.bed'):
         #Get top training_sample_size bed peaks
-        print('Prepare bed'.format(peaks_size))
+        print('Prepare bed file')
         bed_out = bed + '/'
         write_prepared_peaks(bed_path, bed_out, 4, 'peaks')      
     else:
