@@ -186,7 +186,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
 
     # COMPARE SITES
     print('COMPARE SITES')
-    pair_models = list(itertools.combinations(models, 2))
+    pair_models = list(itertools.combinations(models_names, 2))
     for model1, model2 in pair_models:
         tag = 'compare'
         scan1 = scan + '/{0}_{1:.2e}.bed'.format(model1, fpr)
@@ -194,8 +194,8 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
         sites_intersection(peaks_bed, scan1, scan2, tag, model1, model2, results)
 
     # COMBINE SCAN
-    list_bed_path = [scan + '/{0}_{1:.2e}.bed'.format(i, fpr) for i in tools]
-    list_path_fpr_table = [thresholds + '/{}_model_thresholds.txt'.format(i) for i in models]
+    list_bed_path = [scan + '/{0}_{1:.2e}.bed'.format(i, fpr) for i in models_names]
+    list_path_fpr_table = [thresholds + '/{}_model_thresholds.txt'.format(i) for i in models_names]
     combine_results(fasta_test, list_bed_path, list_path_fpr_table, tools, results + '/combined_scan.pro')
 
     # CALCULATE SUMMARY
