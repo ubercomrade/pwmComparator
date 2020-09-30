@@ -165,7 +165,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
     ### CALCULATE PWM MODEL ###
     for model, path in zip(models_names, models_paths):
         pwm_dir = models + '/{}_model/'.format(model)
-        pwm_path = models + '/{}_model/{}_model.pwm'.format(model)
+        pwm_path = models + '/{0}_model/{0}_model.pwm'.format(model)
         pwm_threshold_table = thresholds + '/{}_model_thresholds.txt'.format(model)
 
         pfm = read_matrix(path)
