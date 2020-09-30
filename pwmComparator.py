@@ -17,7 +17,7 @@ from tools.summary import write_peaks_classification
 from tools.scan_best_by_pwm import scan_best_by_pwm
 from tools.extract_sites import extract_sites
 from tools.write_model import write_model
-from lib.common import check_threshold_table, check_bootstrap
+from lib.common import check_threshold_table
 
 def prepare_data(path_to_genome, bed_path, bed, fasta):
 
