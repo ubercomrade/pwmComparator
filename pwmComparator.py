@@ -164,16 +164,18 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
 
     ### CALCULATE PWM MODEL ###
     for model, path in zip(models_names, models_paths):
-        pwm_dir = models + '/{}_model/'.format(model)
-        pwm_path = models + '/{0}_model/{0}_model.pwm'.format(model)
-        pwm_threshold_table = thresholds + '/{}_model_thresholds.txt'.format(model)
+        pwm_dir = models + '/{}/'.format(model)
+        if not os.path.isdir(pwm_dir):
+            os.mkdir(pwm_dir)
+        pwm_path = models + '/{0}/{0}.pwm'.format(model)
+        pwm_threshold_table = thresholds + '/{}_thresholds.txt'.format(model)
 
         pfm = read_matrix(path)
         pwm = make_pwm(pfm)
         write_pwm(pwm_dir, model, pwm)
         
         # THRESHOLD
-        if not os.path.isfile(thresholds_dir + '/pwm_model_thresholds.txt'):
+        if not os.path.isfile(pwm_threshold_table):
             print('Calculate threshold for PWM based on promoters and fpr')
             get_threshold_for_pwm(path_to_promoters,
                     pwm_path,
