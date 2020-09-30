@@ -11,12 +11,12 @@ ext_modules = [Extension('lib.speedup', sources=['lib/speedup.pyx'],)]
 
 #cmdclass={'build_ext': Cython.Build.build_ext},
 setup(
-    name='pipeline',
+    name='pwmComparator',
     version='0.0.1',
     description='compare different PWM models',
     author='Anton Tsukanov',
     author_email='tsukanov@bionet.nsc.ru',
-    url='http://github.com/ubercomrade/pipeline',
+    url='http://github.com/ubercomrade/pwmComparator',
     package_dir={'lib' : 'lib'},
     packages=[
         'lib',
