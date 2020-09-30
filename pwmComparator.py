@@ -9,7 +9,6 @@ import shutil
 from operator import itemgetter
 from shutil import copyfile
 from tools.get_threshold_for_pwm import get_threshold_for_pwm
-from tools.bootstrap_for_pwm import bootstrap_for_pwm
 from tools.scan_by_pwm import scan_by_pwm
 from tools.prepare_bed import write_prepared_peaks
 from tools.sites_intersection import sites_intersection
