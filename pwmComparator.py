@@ -191,7 +191,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
         tag = 'compare'
         scan1 = scan + '/{0}_{1:.2e}.bed'.format(model1, fpr)
         scan2 = scan + '/{0}_{1:.2e}.bed'.format(model2, fpr)
-        sites_intersection(bed_test, scan1, scan2, tag, model1, model2, results)
+        sites_intersection(peaks_bed, scan1, scan2, tag, model1, model2, results)
 
     # COMBINE SCAN
     list_bed_path = [scan + '/{0}_{1:.2e}.bed'.format(i, fpr) for i in tools]
