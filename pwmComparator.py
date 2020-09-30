@@ -247,6 +247,7 @@ def main():
     organism = args.promoters
     path_to_genome = args.genome
     cpu_count = args.cpu_count
+    print(models_paths)
 
     this_dir, this_filename = os.path.split(__file__)
     if organism == 'mm10':
