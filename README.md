@@ -20,6 +20,37 @@ pip3 install -e .
 ## Usage
 The command `pmwComparator.py -h` return:
 
+```
+usage: pwmComparator.py [-h] [-nnames N [N ...]] [-f FPR] [-C CPU_COUNT]
+                        bed N genome output N [N ...]
+
+positional arguments:
+  bed                   path to BED file
+  N                     promoters of organism (hg38, mm10)
+  genome                path to genome fasta file
+  output                output dir
+  N                     list of path to PFMs to use (./model1.pfm,
+                        ./model2.pfm ...)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -names N [N ...]     list of names for models (name1, name2 ...)
+  -f FPR, --FPR FPR     FPR, def=1.9*10^(-4)
+```
+
+Example run:
+
+```
+pwmComparator.py \
+path/to/peaks.bed \
+hg38 \
+/path/to/genomes/hg38.fa \
+./output_dir \
+./model1.pfm \
+./model2.pfm \
+./model3.pfm \
+```
+
 ## License
 
 Copyright (c) 2020 Anton Tsukanov

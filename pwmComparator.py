@@ -108,10 +108,9 @@ def get_threshold(path, fpr_for_thr):
 
 def pipeline(models_names, models_paths, bed_path, fpr, \
     path_to_out, path_to_promoters, \
-    path_to_genome, cpu_count):
+    path_to_genome):
 
     main_out = path_to_out
-    cpu_count = cpu_count
     if not os.path.isdir(main_out):
         os.mkdir(main_out)
     models = main_out + '/models'
@@ -195,7 +194,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
 
     # COMBINE SCAN
     list_bed_path = [scan + '/{0}_{1:.2e}.bed'.format(i, fpr) for i in models_names]
-    list_path_fpr_table = [thresholds + '/{}_thresholds.txt'.format(i) for i in models_names]
+    list_path_fpr_table = [thresholds + '/{}_model_thresholds.txt'.format(i) for i in models_names]
     combine_results(peaks_fa, list_bed_path, list_path_fpr_table, models_names, results + '/combined_scan.pro')
 
     # CALCULATE SUMMARY
@@ -218,8 +217,6 @@ def parse_args():
          help='list of names for models (name1, name2 ...)', required=False, default=[])
     parser.add_argument('-f', '--FPR', action='store', type=float, dest='fpr',
                         required=False, default=1.9*10**(-4), help='FPR, def=1.9*10^(-4)')
-    parser.add_argument('-C', '--processes', action='store', type=int, dest='cpu_count',
-                        required=False, default=4, help='Number of processes to use, default: 2')    
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
@@ -236,7 +233,6 @@ def main():
 
     organism = args.promoters
     path_to_genome = args.genome
-    cpu_count = args.cpu_count
 
     this_dir, this_filename = os.path.split(__file__)
     if organism == 'mm10':
@@ -247,7 +243,7 @@ def main():
         path_to_promoters = os.path.join(this_dir, "promoters", "tair10.fasta")
 
     pipeline(models_names, models_paths, bed_path, fpr, path_to_out, path_to_promoters, \
-        path_to_genome, cpu_count)
+        path_to_genome)
 
 if __name__ == '__main__':
     main()
