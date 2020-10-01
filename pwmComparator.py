@@ -148,7 +148,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
     peaks_bed = bed + '/peaks.bed'
 
     if models_names == 0 or len(models_names) != len(models_paths):
-        models_names = ['model_{}'.format(i) for i in range(1, len(models_paths) + 1)]
+        models_names = ['pwm{}'.format(i) for i in range(1, len(models_paths) + 1)]
 
     ### CALCULATE PWM MODEL ###
     for model, path in zip(models_names, models_paths):
@@ -157,7 +157,7 @@ def pipeline(models_names, models_paths, bed_path, fpr, \
         if not os.path.isdir(pwm_dir):
             os.mkdir(pwm_dir)
         pwm_path = models + '/{0}/{0}.pwm'.format(model)
-        pwm_threshold_table = thresholds + '/{}_thresholds.txt'.format(model)
+        pwm_threshold_table = thresholds + '/{}_model_thresholds.txt'.format(model)
 
         pfm = read_matrix(path)
         pwm = make_pwm(pfm)
